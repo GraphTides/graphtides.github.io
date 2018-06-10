@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>GraphTides</title>
+		<!-- Bootstrap core CSS -->
+		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="css/scrolling-nav.css" rel="stylesheet">
+	</head>
+	<body id="page-top">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+			<div class="container">
+				<a class="navbar-brand" href="#page-top">GraphTides</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item">
+							<a class="btn btn-primary-outline" href="https://github.com/GraphTides/graphtides"> <i class="fa fa-github" aria-hidden="true"></i> GitHub</a>
+						</li>
+						<li class="nav-item">
+							<a class="btn btn-primary-outline" href="https://dl.acm.org/citation.cfm?doid=3210259.3210262"> <i class="fa fa-file-text" aria-hidden="true"></i> Paper</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<header class="bg-primary text-white">
+			<div class="container text-center">
+				<img src="./images/banner.png" alt="GraphTides" width="768">
+				<!-- <h1>GraphTides</h1>
+					<p class="lead">A Framework for Evaluating Stream-based Graph Processing Platforms</p> -->
+			</div>
+		</header>
+		<section id="intro">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 mx-auto">
+						<!-- <h2>GraphTides</h2> -->
+						<h2>GraphTides is a novel generic evaluation framework for stream-based graph processing systems.</h2>
+						<br/>
+						<p class="lead">It covers the full evaluation cycle from workload generation to result analysis and provides the analyst with a set of framework components to design their own experiments for a streambased graph system. </p>
+						<p class="lead"> GraphTides framework supports developers of stream-based graph systems, allowing for in-depth performance measurements, and comparisons of stream-based graph systems. </p>
+						<br/>
+						<br/>	
+						<div class="text-center">
+							<a class="btn btn-primary btn-lg" href="https://github.com/GraphTides/graphtides" role="button"> Clone GraphTides on GitHub </a>
+							<a class="btn btn-primary btn-lg" href="https://dl.acm.org/citation.cfm?doid=3210259.3210262" role="button">Download GraphTides Paper</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</section>
+		<section id="nutshell" class="bg-light">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 mx-auto">
+						<h2>GraphTides In a Nutshell</h2>
+						<p class="lead">
+							For detailed overview of GraphTides framework please refer to our <a href="https://dl.acm.org/citation.cfm?doid=3210259.3210262">GRADES-NDA'18 paper
+							<a/>
+						<p/>
+						<br/>
+						<h3>Overview and Architecture</h3>
+						<p class="lead">GraphTides comprises metrics, workloads, components of the evaluation architecture, and methodological recommendations. </p>
+						<p class="lead">GraphTides framework consists of:
+						<ul class="lead">
+						<li>Graph stream generator component, for the creation of graph streams,</li>
+						<li>Test harness component, which is composed of:
+						<ul>
+						<li>Graph stream replayer,
+						<li>The system under test,
+						<li>Runtime metrics logger, 
+						</ul>
+						</li>
+						<li>Log collector component, for the collection of results.</li>
+						</ul> 
+						</p>
+						<div class="text-center">
+						<img src="./images/architecture.png" alt="GraphTides" width="512"></img>
+						</div>
+						<br/>
+						<!--<p class="lead">The test harness induces a stream of
+							graph events onto the system under test. At the same time, the test
+							harness continuously gathers metrics and processing results from
+							the system.</p> -->
+						<p class="lead">During a test run, the graph stream replayer
+						outputs a generated stream, feeding the system under test while
+						runtime metrics loggers gather continuous data from the system, its
+						processing results, and other sources. After a finished run, the log
+						collector aggregates the recorded data and yields a single result log.</p>
+						<p class="lead">In order to connect the test harness to the system under test, the user either plugs a platform-specific connector into the graph
+						stream replayer component, or provides logic within the platform to receive and terminate the inbound stream accordingly.</p>
+						<p class="lead">Although all components, including the system under test, could
+						be placed on the same machine, GraphTides is aimed at a distributed setup
+						that conforms with most use cases.</p>
+						<br/>
+						<h4>What type of systems does GraphTides support?</h4>
+						<p class="lead">GraphTides is a platform-agnostic framework aimed at stream-based graph processing platforms which receive a continuous, unbounded stream of graph events from an external source via the network,
+						while maintaining a stateful and mutable underlying graph. The systems use the underlying graph to execute online graph computations, therefore, graph computations and graph mutations run concurrently.<p/>
+						<h4>What kind of stream events does GraphTides support?</h4>
+						<p class="lead">GraphTides assume streams where each event contains a single, localized operation which describes a change within the graph topology (i.e.,
+						by adding or removing a vertex or edge) or an update to its state (i.e., by updating the properties of a vertex or edge). </p>
+						<h4>What type of graphs does GraphTides support?</h4>
+						<p class="lead">GraphTides supports directed stateful graphs, where both vertices and edges possess a mutable state. GraphTides does not consider multigraphs or self loops.
+						Undirected graphs can be modeled by ignoring edge directions and stateless graphs can be represented by ignoring state properties.<p/>
+						<h4>What kind of workloads does GraphTides support?</h4>
+						<p class="lead"> GraphTides assumes at least one active graph stream and any number of graph computations to be executed during streaming.
+						Computations can include diverse graph queries, such as calculating graph statistics and graph properties, executing traversal algorithms, running connectivity and community detection algorithms, and many more.<p/>
+						<h4>Which metrics does GraphTides support?</h4>
+						<p class="lead"> GraphTides focuses on time-series values for most metrics, collected at runtime by a set of logger instances. 
+						GraphTides supports measuring general systems metrics such as CPU load, memory usage, network I/O, and disk I/O, as well as additional internal metrics such as internal throughput
+						rates and communication latencies between workers. In addition, GraphTides supports streaming metrics such as ingress rate, and computation metrics such as latency and accuracy.<p/>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="implementation">
+		<div class="container">
+		<div class="row">
+		<div class="col-lg-8 mx-auto">
+		<h3>Implementation and Download</h3>
+		<p class="lead">An up-to-date implementation and source code of GraphTides is <a href="https://github.com/GraphTides/graphtides">available under the MIT license on GitHub.</a></p>
+		<p class="lead">The graph stream generator component is implemented in TypeScript using Node.js. The graph stream replayer component is implemented in Java 9. For our current test evaluations, Python and Node.js scripts are being used as runtime metrics loggers.<p/>
+		</div>
+		</div>
+		</div>
+		</section>
+		<section id="credit" class="bg-light">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8 mx-auto">
+						<h3>Credit</h3>
+						<p class="lead">Please feel free to contact the authors, raise issues, or create a pull-request via <a href="https://github.com/GraphTides/graphtides">GitHub.</a></p>
+						<p class="lead">ACM Ref Citation:</p>
+						<p>Benjamin Erb, Dominik Meißner, Frank Kargl, Benjamin A. Steer, Felix Cuadrado, Domagoj Margan, and Peter Pietzuch. 2018. Graphtides: a framework for evaluating stream-based graph processing platforms. In Proceedings of the 1st ACM SIGMOD Joint International Workshop on Graph Data Management Experiences & Systems (GRADES) and Network Data Analytics (NDA) (GRADES-NDA '18), Akhil Arora, Arnab Bhattacharya, George Fletcher, Josep Lluis Larriba Pey, Shourya Roy, and Robert West (Eds.). ACM, New York, NY, USA, Article 3, 10 pages. DOI: https://doi.org/10.1145/3210259.3210262 </p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Footer -->
+		<footer class="py-5 bg-dark">
+			<div class="container">
+				<p class="m-0 text-center text-white">Copyright &copy; GraphTides 2018</p>
+			</div>
+			<!-- /.container -->
+		</footer>
+		<!-- Bootstrap core JavaScript -->
+		<script src="vendor/jquery/jquery.min.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<!-- Plugin JavaScript -->
+		<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+		<!-- Custom JavaScript for this theme -->
+		<script src="js/scrolling-nav.js"></script>
+		<!-- Font Awesome -->
+		<script src="https://use.fontawesome.com/fdea4483d1.js"></script>
+	</body>
+</html>
